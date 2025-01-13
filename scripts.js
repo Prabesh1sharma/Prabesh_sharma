@@ -13,17 +13,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Navbar background change on scroll
-const navbar = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-      navbar.style.background = 'rgba(30, 51, 115, 0.95)';
-      navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-  } else {
-      navbar.style.background = 'rgba(30, 51, 115, 0.9)';
-      navbar.style.boxShadow = 'none';
-  }
-});
-
+// const navbar = document.querySelector('.nav');
+// window.addEventListener('scroll', () => {
+//   if (window.scrollY > 100) {
+//       navbar.style.background = 'rgba(30, 51, 115, 0.95)';
+//       navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+//   } else {
+//       navbar.style.background = 'rgba(30, 51, 115, 0.9)';
+//       navbar.style.boxShadow = 'none';
+//   }
+// });
+document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const links = document.querySelectorAll(".nav-links a");
+  
+    // Toggle menu when hamburger button is clicked
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  
+    // Close menu when any navigation link is clicked
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+    });
+  
+    // Optional: Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        navLinks.classList.remove("active");
+      }
+    });
+  });
 // Active section highlighting in navigation
 window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('section');

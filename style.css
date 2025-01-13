@@ -32,9 +32,11 @@ body {
 .nav {
   position: fixed;
   width: 100%;
-  background: rgba(30, 51, 115, 0.9);
+  background: rgba(17, 17, 18, 0.95); /* Matches hero's starting color */
   padding: 20px 0;
   z-index: 100;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 157, 0.1); /* Subtle line using highlight color */
 }
 
 .nav-links {
@@ -42,17 +44,85 @@ body {
   justify-content: center;
   gap: 30px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
-  color:#00ff9d;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Animated underline effect */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #00ff9d;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .nav-links a:hover {
-  color: #0073ff;
+  color: #00ff9d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav {
+    padding: 10px 20px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(17, 17, 18, 0.98);
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 255, 157, 0.1);
+    border: 1px solid rgba(0, 255, 157, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #00ff9d;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 200;
+    transition: color 0.3s ease;
+  }
+
+  .nav-toggle:hover {
+    color: #ffffff;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none;
+  }
 }
 
 /* Hero Section */
